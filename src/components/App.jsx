@@ -25,16 +25,11 @@ export default class App extends Component {
 		largeImageURL: '',
 		total: 0,
 	}
-	componentDidUpdate(prevProps, prevState) {
+	componentDidUpdate(_, prevState) {
     const { search, page } = this.state;
 
 		if ((search && prevState.search !== search) || page > prevState.page) {
 			this.fetchImages(search, page)
-		}
-		if (prevState.search !== search) {
-			this.setState({
-          images: [],
-        })
 		}
   }
   
@@ -89,14 +84,10 @@ export default class App extends Component {
   }
   
 	handelFormSubmit = search => {
-		this.setState(prevState => {
-			if (prevState.search === search) {
-				return
-			} else
-				return {
-					search,
-					page: 1,
-				}
+		this.setState({
+			search,
+			images: [],
+			page: 1,
 		})
 	}
 
